@@ -1,5 +1,10 @@
 package com.jdyh.chatroom.common.handle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.jdyh.chatroom.common.base.BaseNettyServer;
+
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -11,6 +16,8 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 public class TextWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWebSocketFrame>{
 	
 	private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+	
+	private Logger logger = LoggerFactory.getLogger(BaseNettyServer.class);
 
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
@@ -56,19 +63,20 @@ public class TextWebSocketFrameHandle extends SimpleChannelInboundHandler<TextWe
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		Channel channel = ctx.channel();
 		
-		System.out.println(channel.remoteAddress() + "上线\n");		
+		logger.info(channel.remoteAddress() + "上线\n");
+		
 	}
 	
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		Channel channel = ctx.channel();
 		
-		System.out.println(channel.remoteAddress() + "下线\n");		
+		logger.info(channel.remoteAddress() + "下线\n");
 	}
 	
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		System.out.println("异常发生");
+		logger.info("异常发生");
 		ctx.channel().close();
 	}
 
