@@ -1,6 +1,9 @@
-package com.jdyh.chatroom.server;
+package com.jdyh.chatroom.common.base;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -18,7 +21,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  *
  */
 public abstract class BaseNettyServer {
-
+	
+	private Logger logger = LoggerFactory.getLogger(BaseNettyServer.class);
 	/**
 	 * 	处理器集合
 	 * 
@@ -33,6 +37,7 @@ public abstract class BaseNettyServer {
 	 * @throws Exception
 	 */
 	public void start(int port) throws Exception {
+		logger.info("服务启动端口：" + port);
 		// 事件循环组
 		EventLoopGroup parentLoopGroup = new NioEventLoopGroup();
 		EventLoopGroup childLoopGroup = new NioEventLoopGroup();

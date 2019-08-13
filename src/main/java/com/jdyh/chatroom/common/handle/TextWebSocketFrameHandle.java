@@ -1,4 +1,4 @@
-package com.jdyh.chatroom.server;
+package com.jdyh.chatroom.common.handle;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;

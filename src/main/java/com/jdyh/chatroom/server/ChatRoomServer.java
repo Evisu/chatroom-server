@@ -3,6 +3,11 @@ package com.jdyh.chatroom.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.jdyh.chatroom.common.base.BaseNettyServer;
+import com.jdyh.chatroom.common.handle.TextWebSocketFrameHandle;
+
 import io.netty.channel.ChannelHandler;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
@@ -15,6 +20,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
  * @author walkman
  *
  */
+@Service
 public class ChatRoomServer extends BaseNettyServer{
 	public static void main(String[] args) throws Exception {
 		new ChatRoomServer().start(8899);
